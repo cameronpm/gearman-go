@@ -7,30 +7,30 @@ The protocols were written in pure Go. It contains two sub-packages:
 The client package is used for sending jobs to the Gearman job server,
 and getting responses from the server.
 
-	"github.com/mikespook/gearman-go/client"
+	"github.com/cameronpm/gearman-go/client"
 
 The worker package will help developers in developing Gearman worker
 service easily.
 
-	"github.com/mikespook/gearman-go/worker"
+	"github.com/cameronpm/gearman-go/worker"
 
 [![Build Status](https://travis-ci.org/mikespook/gearman-go.png?branch=master)](https://travis-ci.org/mikespook/gearman-go)
-[![GoDoc](https://godoc.org/github.com/mikespook/gearman-go?status.png)](https://godoc.org/github.com/mikespook/gearman-go)
+[![GoDoc](https://godoc.org/github.com/cameronpm/gearman-go?status.png)](https://godoc.org/github.com/cameronpm/gearman-go)
 
 Install
 =======
 
 Install the client package:
 
-> $ go get github.com/mikespook/gearman-go/client
+> $ go get github.com/cameronpm/gearman-go/client
 	
 Install the worker package:
 
-> $ go get github.com/mikespook/gearman-go/worker
+> $ go get github.com/cameronpm/gearman-go/worker
 
 Both of them:
 
-> $ go get github.com/mikespook/gearman-go
+> $ go get github.com/cameronpm/gearman-go
 
 Usage
 =====
@@ -87,7 +87,7 @@ __Use at your own risk!__
 
  * master current usable version
  * 0.2-dev Refactoring a lot of things
- * 0.1-testing Old API and some known issues, eg. [issue-14](https://github.com/mikespook/gearman-go/issues/14)
+ * 0.1-testing Old API and some known issues, eg. [issue-14](https://github.com/cameronpm/gearman-go/issues/14)
 
 Contributors
 ============

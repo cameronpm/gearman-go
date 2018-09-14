@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mikespook/gearman-go/worker"
+	"github.com/cameronpm/gearman-go/worker"
 	"github.com/mikespook/golib/signal"
 )
 
