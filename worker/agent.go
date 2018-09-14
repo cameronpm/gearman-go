@@ -137,7 +137,7 @@ func (a *agent) Grab() {
 
 func (a *agent) grab() {
 	outpack := getOutPack()
-	outpack.dataType = dtGrabJobUniq
+	outpack.dataType = dtGrabJob //Uniq
 	a.write(outpack)
 }
 
