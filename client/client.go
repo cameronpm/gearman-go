@@ -58,10 +58,6 @@ func (r *responseHandlerMap) put(key string, rh ResponseHandler) {
 	r.Unlock()
 }
 
-func (r *responseHandlerMap) putNoLock(key string, rh ResponseHandler) {
-	r.holder[key] = rh
-}
-
 // New returns a client.
 func New(network, addr string) (client *Client, err error) {
 	client = &Client{
@@ -216,7 +212,7 @@ type handleOrError struct {
 }
 
 func (client *Client) do(funcname string, data []byte,
-	flag uint32) (handle string, err error) {
+	flag uint32, h ResponseHandler) (handle string, err error) {
 	if client.conn == nil {
 		return "", ErrLostConn
 	}
@@ -230,6 +226,9 @@ func (client *Client) do(funcname string, data []byte,
 			return
 		}
 		handle = resp.Handle
+		if h != nil {
+			client.respHandler.put(handle, h)
+		}
 		result <- handleOrError{handle, nil}
 	})
 	id := IdGen.Id()
@@ -264,12 +263,7 @@ func (client *Client) Do(funcname string, data []byte,
 		datatype = dtSubmitJob
 	}
 
-	client.respHandler.Lock()
-	defer client.respHandler.Unlock()
-	handle, err = client.do(funcname, data, datatype)
-	if err == nil && h != nil {
-		client.respHandler.putNoLock(handle, h)
-	}
+	handle, err = client.do(funcname, data, datatype, h)
 	return
 }
 
@@ -289,7 +283,7 @@ func (client *Client) DoBg(funcname string, data []byte,
 	default:
 		datatype = dtSubmitJobBg
 	}
-	handle, err = client.do(funcname, data, datatype)
+	handle, err = client.do(funcname, data, datatype, nil)
 	return
 }
 
